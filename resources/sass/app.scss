@@ -1,0 +1,22 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+@fa-font-path:   "../font";
+// Bootstrap
+// @import '~bootstrap/scss/bootstrap';
+@import '~admin-lte/dist/css/adminlte.min.css';
+@import '~font-awesome/scss/font-awesome.scss';
+
+.navbar-light {
+	background-color: #fff;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.router-link-exact-active {
+	background-color: #3f51b5;
+	color: #fff !important;
+}
+
