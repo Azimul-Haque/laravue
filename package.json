@@ -26,6 +26,7 @@
         "admin-lte": "^3.0.0-alpha.2",
         "bootstrap": "^4.1.2",
         "font-awesome": "^4.7.0",
+        "laravel-vue-pagination": "^2.3.0",
         "moment": "^2.24.0",
         "sweetalert2": "^8.10.7",
         "vform": "^1.0.0",

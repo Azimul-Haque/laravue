@@ -2,6 +2,7 @@
     <div class="container">
         <div class="row">
           <div class="col-12">
+            <!-- <img src="images/click_here_2li1.svg" style="max-height: 200px;"> -->
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Responsive Hover Table</h3>
@@ -33,11 +34,11 @@
                   </tr>
                  </thead>
                  <tbody>
-                  <tr v-for="user in users" :key="user.id">
+                  <tr v-for="user in users.data" :key="user.id">
                     <td>{{ user.id }}</td>
                     <td>{{ user.name }}</td>
                     <td>{{ user.email }}</td>
-                    <td><img :src="getUserProfilePhoto(user.image)" class="img-responsive" style="max-height: 70px; width: auto;"></td>
+                    <td><img :src="getUserProfilePhoto(user.image)" class="img-responsive" style="max-height: 50px; width: auto;"></td>
                     <td>{{ user.created_at | date }}</td>
                     <td>
                         <button type="button" class="btn btn-success btn-sm" @click="editUserModal(user)">
@@ -53,6 +54,9 @@
                 </table>
               </div>
               <!-- /.card-body -->
+              <div class="card-footer">
+                <pagination :data="users" @pagination-change-page="getPaginationResults"></pagination>
+              </div>
             </div>
             <!-- /.card -->
           </div>
@@ -140,7 +144,7 @@
                 this.form.fill(user);
             },
             loadUsers() {
-                axios.get('api/user').then(({ data }) => (this.users = data.data));
+                axios.get('api/user').then(({ data }) => (this.users = data));
             },
             createUser() {
                 this.$Progress.start();
@@ -252,12 +256,34 @@
                   return '/images/profile.png';
                 }
               }
+            },
+            getPaginationResults(page = 1) {
+              axios.get('api/user?page=' + page)
+              .then(response => {
+                this.users = response.data;
+              });
             }
         },
         created() {
             this.loadUsers();
             Fire.$on('AfterCreated', () => {
                 this.loadUsers();
+            });
+
+            Fire.$on('searching', () => {
+                let query = this.$parent.search;
+                if(query != '') {
+                  axios.get('api/searchuser/' + query)
+                  .then((data) => {
+                    this.users = data.data;
+                  })
+                  .catch(() => {
+
+                  })
+                } else {
+                  this.loadUsers();
+                }
+                
             });
         }
     }

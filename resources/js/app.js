@@ -40,6 +40,7 @@ let routes = [
   { path: '/dashboard', component: require('./components/Dashboard.vue').default },
   { path: '/profile', component: require('./components/Profile.vue').default },
   { path: '/users', component: require('./components/Users.vue').default },
+  { path: '*', component: require('./components/404.vue').default },
 ]
 
 const router = new VueRouter({
@@ -64,6 +65,7 @@ window.Fire = new Vue();
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('pagination', require('laravel-vue-pagination'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -73,5 +75,13 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    data: {
+      search: ''
+    },
+    methods: {
+      searchIt: _.debounce(() => {
+        Fire.$emit('searching');
+      }, 1000) 
+    }
 });

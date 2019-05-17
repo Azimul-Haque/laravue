@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 use App\User;
-use Image, File;
+use Image, File, DB;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -19,12 +19,12 @@ class UserController extends Controller
      */
     public function __construct()
     {        
-        $this->middleware('auth:api');
+        // $this->middleware('auth:api'); 
     }
 
     public function index()
     {
-        return User::latest()->paginate(10);
+        return User::latest()->paginate(5);
     }
 
     /**
@@ -135,5 +135,16 @@ class UserController extends Controller
         $user->delete();
 
         return ['message' => 'User deleted!'];
+    }
+
+    public function searchUser($query)
+    {
+        $users = User::where(function($search) use ($query) {
+            $search->where('name', 'LIKE', '%'.$query.'%')
+                   ->orWhere('email', 'LIKE', '%'.$query.'%');
+         })->paginate(5);
+        
+
+        return $users;
     }
 }
