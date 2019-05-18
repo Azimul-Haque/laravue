@@ -223,7 +223,7 @@
                       if(((this.height/this.width) < 0.9375) || ((this.height/this.width) > 1.07142)) {
                         swal.fire(
                          'Ops!',
-                         'The ratio of height and width should be 1:1',
+                         'The ratio of height and width should be same',
                          'warning'
                         )
                       }
