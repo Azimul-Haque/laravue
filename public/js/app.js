@@ -2141,7 +2141,7 @@ __webpack_require__.r(__webpack_exports__);
 
           img.onload = function () {
             if (this.height / this.width < 0.9375 || this.height / this.width > 1.07142) {
-              swal.fire('Ops!', 'The ratio of height and width should be 1:1', 'warning');
+              swal.fire('Ops!', 'The ratio of height and width should be same', 'warning');
             }
           };
 
@@ -75237,7 +75237,8 @@ var routes = [{
 }, {
   path: '/users',
   component: __webpack_require__(/*! ./components/Users.vue */ "./resources/js/components/Users.vue")["default"]
-}, {
+}, // { path: '/home', component: require('./components/Users.vue').default },
+{
   path: '*',
   component: __webpack_require__(/*! ./components/404.vue */ "./resources/js/components/404.vue")["default"]
 }];
