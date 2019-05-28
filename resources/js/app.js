@@ -7,6 +7,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import VueRouter from 'vue-router'
 import moment from 'moment'
 import { Form, HasError, AlertError } from 'vform'
 import VueProgressBar from 'vue-progressbar'
@@ -32,7 +33,6 @@ window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
 
-import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
